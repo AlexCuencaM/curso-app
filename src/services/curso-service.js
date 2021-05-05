@@ -7,7 +7,7 @@ export const getCursos = () => new Promise((resolves, reject) =>{
 })
 
 export const postCurso = (form) => new Promise((resolves, reject) =>{
-    post('http://localhost:4000/api/cursos')
+    post('http://localhost:4000/api/cursos',form)
         .then((response) => resolves(response))
         .catch((response) => reject(response));
 })

@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "../../hooks/useForm";
-import { postCourse } from "../../redux/actions/curso";
-import { useDispatch } from "react-redux";
+import { getCursos, postCurso } from "../../services/curso-service";
+import { CursoContext } from "../../state/CursoContext";
+import { types } from "../../state/types";
 
 export const AddCurso = () => {
-    const dispatch = useDispatch();
+    const {dispatch} = useContext(CursoContext);
+
     const [form, handleChange] = useForm({
         name:"",
     })
     const handleSubmit = (e) =>{
         e.preventDefault();
-        dispatch(postCourse(form));
+        postCurso(form)
+        .then(e =>{
+            getCursos()
+            .then(response =>{
+                console.log("hey")
+                dispatch({
+                    type:types.results,
+                    payload: response.data,
+                })
+            })
+            .catch(console.log)
+            })
+            .catch(e =>{
+                console.log(e)
+            })
+        // dispatch(postCourse(form));
     }
     return (
         <>

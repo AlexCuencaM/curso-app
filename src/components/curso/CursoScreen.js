@@ -1,34 +1,38 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+
 import { getCursos } from '../../services/curso-service'
+import { CursoContext } from '../../state/CursoContext'
+import { types } from '../../state/types'
+import { SearchCurso } from '../UI/SearchCurso'
+// import { getAllCourses } from '../../state/selectors/getAllCourses'
 import { AddCurso } from './AddCurso'
 import { CursoList } from './CursoList'
-import { useSelector, useDispatch } from "react-redux";
-// const cursos2 = [
-//     {
-//         id:1,
-//         name:"Docker",
 
-//     },
-//     {
-//         id:2,
-//         name:"Javascript",
-
-//     },
-
-// ]
 export const CursoScreen = () => {
-    const cursos = useSelector(state => state.cursos);
-    // useEffect(() => {
-    //     getCursos()
-    //         .then(response =>{
-    //             setCursos(response);
-    //         })
-    //         .catch(console.log)
-    // }, [cursos])
+    // const cursos = useSelector(state => state.cursos);
+    const [cursos, setCursos] = useState([]);
+    const {state, dispatch} = useContext(CursoContext);
+    useEffect(() => {
+        getCursos()
+            .then(response =>{
+                dispatch({
+                    type:types.results,
+                    payload: response.data,
+                })
+                // setCursos(response.data)
+            })
+            .catch(console.log)
+
+    }, [dispatch])
+    useEffect(() => {
+        console.log(state);
+        setCursos(state);
+    }, [state])
     return (
         <div>
             <AddCurso/>
             <CursoList cursos={ cursos }/>
+            <SearchCurso/>
         </div>
     )
 }

@@ -1,13 +1,19 @@
+import { useReducer } from "react";
+import { CursoContext } from "./state/CursoContext";
+import { cursoReducer } from "./state/reducers/cursoReducer";
 import { CursoScreen } from "./components/curso/CursoScreen";
-import { Provider } from "react-redux";
-import store from "./redux/store/store";
+
+
 function App() {
-  return (
-    <Provider store={store}>
-      <h1>Curso APP</h1>
-      <CursoScreen/>
-    </Provider>
-  );
+    const [state, dispatch] = useReducer(cursoReducer, []);
+    return (
+        <>
+            <h1>Curso APP</h1>
+            <CursoContext.Provider value={{ state, dispatch }}>
+                <CursoScreen />
+            </CursoContext.Provider>
+        </>
+    );
 }
 
 export default App;
