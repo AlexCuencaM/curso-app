@@ -22,7 +22,7 @@ export const SearchCurso = () => {
             <hr/>
             <form onSubmit={handleSubmit}>
                 <input name="name" value={form.name} onChange={handleChange} type="text" placeholder="Ej: Docker"/>
-                <input type="submit" value="Search"/>
+                <input className="btn btn-primary" type="submit" value="Search"/>
             </form>
             {results.length > 0 ? 
                 results.map(result => 

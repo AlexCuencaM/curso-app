@@ -7,7 +7,6 @@ export const CursoList = (props) => {
         <div className="curso__list">
             {cursos.map(curso => (
                 <CursoItem key={curso._id} name={curso.name} id={curso._id}/>
-
             ))}
         </div>
     )

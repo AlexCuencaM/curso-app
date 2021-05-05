@@ -29,7 +29,7 @@ export const CursoScreen = () => {
         setCursos(state);
     }, [state])
     return (
-        <div>
+        <div className="container-flex">
             <AddCurso/>
             <CursoList cursos={ cursos }/>
             <SearchCurso/>

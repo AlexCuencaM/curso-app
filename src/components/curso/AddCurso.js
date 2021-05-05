@@ -35,7 +35,7 @@ export const AddCurso = () => {
             <hr/>
             <form onSubmit={handleSubmit}>
                 <input name="name" value={form.name} onChange={handleChange} type="text" placeholder="Ej: Docker"/>
-                <input type="submit" value="Submit"/>
+                <input className="btn btn-primary" type="submit" value="Submit"/>
             </form>
         </>
     );
